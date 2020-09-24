@@ -16,8 +16,18 @@ const getTodos = (resource, callback) => {
     });
 };
 
+// chaining promises
 getTodos('todos/raiden.json').then(data => {
-    console.log('promise resolved:', data);
+    console.log('promise 1 resolved:', data);
+    return getTodos('todos/scorpion.json');
+}).then(data => {
+    console.log('promise 2 resolved:', data);
+    return getTodos('todos/subzero.json');
+}).then(data => {
+    console.log('promise 3 resolved:', data);
+    return getTodos('todos.json');
+}).then(data => {
+    console.log('promise 4 resolved:', data);
 }).catch(err => {
     console.log('promise rejected:', err)
-})
+});
